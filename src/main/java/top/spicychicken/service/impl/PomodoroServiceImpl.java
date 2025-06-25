@@ -8,11 +8,9 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
-import top.spicychicken.entity.Break;
 import top.spicychicken.entity.Interruption;
 import top.spicychicken.entity.Pomodoro;
 import top.spicychicken.entity.Task;
-import top.spicychicken.repository.BreakRepository;
 import top.spicychicken.repository.InterruptionRepository;
 import top.spicychicken.repository.PomodoroRepository;
 import top.spicychicken.repository.TaskRepository;
@@ -23,7 +21,6 @@ import top.spicychicken.service.PomodoroService;
 public class PomodoroServiceImpl implements PomodoroService {
     private final PomodoroRepository pomodoroRepository;
     private final TaskRepository taskRepository;
-    private final BreakRepository breakRepository;
     private final InterruptionRepository interruptionRepository;
 
     public Pomodoro startPomodoro(Integer taskId) {
@@ -32,7 +29,7 @@ public class PomodoroServiceImpl implements PomodoroService {
 
         Pomodoro pomodoro = new Pomodoro();
         pomodoro.setTask(task);
-        pomodoro.setStartTime(LocalDateTime.now());
+        pomodoro.setFocusStartTime(LocalDateTime.now());
         return pomodoroRepository.save(pomodoro);
     }
 
@@ -40,28 +37,27 @@ public class PomodoroServiceImpl implements PomodoroService {
         Pomodoro pomodoro = pomodoroRepository.findById(pomodoroId)
                 .orElseThrow(() -> new RuntimeException("Pomodoro not found"));
 
-        Duration duration = Duration.between(pomodoro.getStartTime(), LocalDateTime.now());
-        pomodoro.setDuration(duration);
+        Duration duration = Duration.between(pomodoro.getFocusStartTime(), LocalDateTime.now());
+        pomodoro.setFocusDuration(duration);
         return pomodoroRepository.save(pomodoro);
     }
 
-    public Break startBreak(Integer pomodoroId) {
+    public Pomodoro startBreak(Integer pomodoroId) {
         Pomodoro pomodoro = pomodoroRepository.findById(pomodoroId)
                 .orElseThrow(() -> new RuntimeException("Pomodoro not found"));
 
-        Break breakRecord = new Break();
-        breakRecord.setPomodoro(pomodoro);
-        breakRecord.setStartTime(LocalDateTime.now());
-        return breakRepository.save(breakRecord);
+        Pomodoro breakRecord = new Pomodoro();
+        breakRecord.setBreakStartTime(LocalDateTime.now());
+        return pomodoroRepository.save(breakRecord);
     }
 
-    public Break endBreak(Integer breakId) {
-        Break breakRecord = breakRepository.findById(breakId)
-                .orElseThrow(() -> new RuntimeException("Break not found"));
+    public Pomodoro endBreak(Integer breakId) {
+        Pomodoro breakRecord = pomodoroRepository.findById(breakId)
+                .orElseThrow(() -> new RuntimeException("Pomodoro not found"));
 
-        Duration duration = Duration.between(breakRecord.getStartTime(), LocalDateTime.now());
-        breakRecord.setDuration(duration);
-        return breakRepository.save(breakRecord);
+        Duration duration = Duration.between(breakRecord.getBreakStartTime(), LocalDateTime.now());
+        breakRecord.setBreakDuration(duration);
+        return pomodoroRepository.save(breakRecord);
     }
 
     public Interruption recordInterruption(Integer pomodoroId, Integer type) {

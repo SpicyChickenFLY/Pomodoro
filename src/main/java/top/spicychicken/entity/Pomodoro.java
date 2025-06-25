@@ -20,14 +20,17 @@ public class Pomodoro {
     @JoinColumn(name = "task_id", referencedColumnName = "id")
     private Task task;
 
-    @Column(name = "start_time")
-    private LocalDateTime startTime;
+    @Column(name = "focus_start_time")
+    private LocalDateTime focusStartTime;
 
-    @Column(name = "duration")
-    private Duration duration;
+    @Column(name = "focus_duration")
+    private Duration focusDuration;
 
-    @OneToMany(mappedBy = "pomodoro", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Break> breaks = new ArrayList<>();
+    @Column(name = "break_start_time")
+    private LocalDateTime breakStartTime;
+
+    @Column(name = "break_duration")
+    private Duration breakDuration;
 
     @OneToMany(mappedBy = "pomodoro", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Interruption> interruptions = new ArrayList<>();

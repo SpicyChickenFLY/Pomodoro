@@ -1,12 +1,3 @@
-DROP TABLE IF EXISTS `break`;
-CREATE TABLE `break` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `pomodoro_id` int DEFAULT NULL,
-  `start_time` datetime(6) DEFAULT NULL COMMENT '休息开始时间',
-  `duration` time DEFAULT NULL COMMENT '休息时长',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
 DROP TABLE IF EXISTS `interruption`;
 CREATE TABLE `interruption` (
   `id` int NOT NULL AUTO_INCREMENT,
@@ -27,8 +18,10 @@ DROP TABLE IF EXISTS `pomodoro`;
 CREATE TABLE `pomodoro` (
   `id` int NOT NULL AUTO_INCREMENT,
   `task_id` int DEFAULT NULL COMMENT '所专注的活动',
-  `start_time` datetime(6) DEFAULT NULL COMMENT '专注开始时间',
-  `duration` time DEFAULT NULL COMMENT '专注时长',
+  `focus_start_time` datetime(6) DEFAULT NULL COMMENT '专注开始时间',
+  `focus_duration` time DEFAULT NULL COMMENT '专注时长',
+  `break_start_time` datetime(6) DEFAULT NULL COMMENT '休息开始时间',
+  `break_duration` time DEFAULT NULL COMMENT '休息时长',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 

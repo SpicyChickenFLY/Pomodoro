@@ -15,12 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
-import top.spicychicken.entity.Break;
 import top.spicychicken.entity.Interruption;
 import top.spicychicken.entity.Plan;
 import top.spicychicken.entity.Pomodoro;
 import top.spicychicken.entity.Task;
-import top.spicychicken.service.BreakService;
 import top.spicychicken.service.InterruptionService;
 import top.spicychicken.service.PlanService;
 import top.spicychicken.service.PomodoroService;
@@ -32,10 +30,8 @@ import top.spicychicken.service.TaskService;
 @RequiredArgsConstructor
 public class PomodoroController {
 
-    // 补全所有必要的服务依赖
     private final PomodoroService pomodoroService;
     private final TaskService taskService;
-    private final BreakService breakService;
     private final InterruptionService interruptionService;
     private final PlanService planService;
     private final PomodoroStatsService pomodoroStatsService;
@@ -65,17 +61,6 @@ public class PomodoroController {
     @PostMapping("/{id}/complete")
     public ResponseEntity<Pomodoro> completePomodoro(@PathVariable Integer id) {
         return ResponseEntity.ok(pomodoroService.completePomodoro(id));
-    }
-
-    // 休息操作接口
-    @PostMapping("/{id}/break/start")
-    public ResponseEntity<Break> startBreak(@PathVariable Integer id) {
-        return ResponseEntity.ok(breakService.startBreak(id));
-    }
-
-    @PostMapping("/break/{breakId}/end")
-    public ResponseEntity<Break> endBreak(@PathVariable Integer breakId) {
-        return ResponseEntity.ok(breakService.endBreak(breakId));
     }
 
     // 中断记录接口

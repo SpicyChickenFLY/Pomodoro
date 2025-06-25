@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MybatisAnnotationApplication {
+public class PomodoroApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MybatisAnnotationApplication.class, args);
+		SpringApplication.run(PomodoroApplication.class, args);
 	}
 }
