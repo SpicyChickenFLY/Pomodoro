@@ -49,3 +49,14 @@ INSERT INTO plan (
     task_id, plan_date
 ) VALUES
     ( 1, '2025-06-25' )
+
+-- 查看所有中断
+SELECT id, pomodoro_id, int_type, start_time FROM interruption;
+-- 专注期间发生中断
+INSERT INTO interruption (
+    pomodoro_id, int_type, start_time
+) VALUES
+    ( 1, 1, now() );
+
+-- 查看所有休息情况
+-- 开始休息
