@@ -11,7 +11,7 @@ LEFT JOIN (
 ON p.task_id = task.id;
 -- 查看今日计划活动
 SELECT t.id, t.title, t.status, t.estimate_pomodoro_cnt
-    FROM plan p
+FROM plan p
 LEFT JOIN task t ON p.task_id = t.id
 WHERE p.plan_date = CURRENT_DATE;
 
@@ -22,13 +22,13 @@ INSERT INTO task (
     ( '番茄钟研发', 1, 1 );
 -- 删除指定活动（需要改
 DELETE FROM task
-    WHERE id = 1;
+WHERE id = 1;
 -- 更新活动信息
 UPDATE task
-    SET title = '番茄工作法信息系统研发',
-        status = 1,
-        estimate_pomodoro_cnt = 8
-    WHERE id = 1;
+SET title = '番茄工作法信息系统研发',
+    status = 1,
+    estimate_pomodoro_cnt = 8
+WHERE id = 1;
 
 -- 列出所有专注
 SELECT * FROM pomodoro;
@@ -38,7 +38,7 @@ INSERT INTO pomodoro (
 ) VALUES ( 1, now(), '00:25:00' );
 -- 查看今日专注
 SELECT p.id, t.title, p.start_time, p.duration
-    FROM pomodoro p
+FROM pomodoro p
 LEFT JOIN task t ON p.task_id = t.id
 WHERE DATE(p.start_time) = CURRENT_DATE;
 
@@ -57,6 +57,3 @@ INSERT INTO interruption (
     pomodoro_id, int_type, start_time
 ) VALUES
     ( 1, 1, now() );
-
--- 查看所有休息情况
--- 开始休息

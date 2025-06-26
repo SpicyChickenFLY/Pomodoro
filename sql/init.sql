@@ -18,10 +18,14 @@ DROP TABLE IF EXISTS `pomodoro`;
 CREATE TABLE `pomodoro` (
   `id` int NOT NULL AUTO_INCREMENT,
   `task_id` int DEFAULT NULL COMMENT '所专注的活动',
-  `focus_start_time` datetime(6) DEFAULT NULL COMMENT '专注开始时间',
-  `focus_duration` time DEFAULT NULL COMMENT '专注时长',
-  `break_start_time` datetime(6) DEFAULT NULL COMMENT '休息开始时间',
-  `break_duration` time DEFAULT NULL COMMENT '休息时长',
+  `focus_duration` varchar(50) DEFAULT NULL COMMENT '专注预计时长',
+  `focus_start_time` datetime(6) DEFAULT NULL COMMENT '专注实际开始时间',
+  `focus_end_time` datetime(6) DEFAULT NULL COMMENT '专注实际结束时间',
+  `focus_aborted` boolean NOT NULL DEFAULT FALSE COMMENT '专注是否被废止',
+  `break_duration` varchar(50) DEFAULT NULL COMMENT '休息预计时长',
+  `break_start_time` datetime(6) DEFAULT NULL COMMENT '休息实际开始时间',
+  `break_end_time` datetime(6) DEFAULT NULL COMMENT '休息实际结束时间',
+  `break_aborted` boolean NOT NULL DEFAULT FALSE COMMENT '休息是否被跳过',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
