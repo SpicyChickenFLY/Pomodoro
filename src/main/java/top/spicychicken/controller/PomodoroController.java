@@ -26,7 +26,7 @@ import top.spicychicken.service.PomodoroStatsService;
 import top.spicychicken.service.TaskService;
 
 @RestController
-@RequestMapping("/api/pomodoro")
+@RequestMapping("/api")
 @RequiredArgsConstructor
 public class PomodoroController {
 
@@ -53,12 +53,17 @@ public class PomodoroController {
     }
 
     // 番茄钟核心操作接口
-    @PostMapping("/start")
+    @PostMapping("/task/{id}/focus/start")
     public ResponseEntity<Pomodoro> startPomodoro(@RequestParam Integer taskId) {
         return ResponseEntity.ok(pomodoroService.startFocus(taskId));
     }
 
-    @PostMapping("/{id}/complete")
+    @PostMapping("/task/{id}/focus/abort")
+    public ResponseEntity<Pomodoro> abortPomodoro(@PathVariable Integer id) {
+        return ResponseEntity.ok(pomodoroService.completeFocus(id));
+    }
+
+    @PostMapping("/task/{id}/focus/complete")
     public ResponseEntity<Pomodoro> completePomodoro(@PathVariable Integer id) {
         return ResponseEntity.ok(pomodoroService.completeFocus(id));
     }

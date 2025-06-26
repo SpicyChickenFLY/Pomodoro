@@ -21,7 +21,7 @@ public class Task {
     private Integer status;
 
     @Column(name = "estimate_pomodoro_cnt")
-    private Integer estimatePomodoroCount;
+    private Integer estimatePomodoroCnt;
 
     @OneToMany(mappedBy = "task", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Pomodoro> pomodoros = new ArrayList<>();

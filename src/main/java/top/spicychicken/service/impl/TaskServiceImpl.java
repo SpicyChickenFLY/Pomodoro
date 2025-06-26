@@ -34,8 +34,8 @@ public class TaskServiceImpl implements TaskService {
         if (delta.getStatus() != null) {
             task.setStatus(delta.getStatus());
         }
-        if (delta.getEstimatePomodoroCount() != null) {
-            task.setEstimatePomodoroCount(delta.getEstimatePomodoroCount());
+        if (delta.getEstimatePomodoroCnt() != null) {
+            task.setEstimatePomodoroCnt(delta.getEstimatePomodoroCnt());
         }
         return taskRepository.save(task);
     }

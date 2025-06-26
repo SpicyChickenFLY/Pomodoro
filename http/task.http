@@ -1,0 +1,24 @@
+@baseUrl = localhost:8080
+
+###
+# @title List all task
+GET localhost:8080/api/tasks
+
+{}
+
+###
+# @title Add task
+POST localhost:8080/api/tasks
+
+{
+    "title": "CMDB同步工具配置",
+    "status": 1,
+    "estimate_pomodoro_cnt": 2
+}
+
+
+###
+# @title Change title of task
+
+###
+# @title Change estimate_pomodoro_cnt of task

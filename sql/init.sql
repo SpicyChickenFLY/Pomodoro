@@ -33,7 +33,7 @@ DROP TABLE IF EXISTS `task`;
 CREATE TABLE `task` (
   `id` int NOT NULL AUTO_INCREMENT,
   `title` varchar(255) DEFAULT NULL COMMENT '活动内容',
-  `status` tinyint(1) DEFAULT NULL COMMENT '活动类型',
+  `status` tinyint(1) DEFAULT NULL COMMENT '活动类型 1-活动 2-完成',
   `estimate_pomodoro_cnt` int DEFAULT NULL COMMENT '预计专注数',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
