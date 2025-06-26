@@ -12,9 +12,5 @@ import top.spicychicken.entity.Pomodoro;
 public interface PomodoroRepository extends JpaRepository<Pomodoro, Integer> {
     List<Pomodoro> findByTaskId(Integer taskId);
 
-    List<Pomodoro> findByStartTimeBetween(LocalDateTime start, LocalDateTime end);
-
-    @Query("SELECT p FROM Pomodoro p WHERE p.task.id = :taskId AND p.startTime >= :startDate")
-    List<Pomodoro> findRecentByTask(@Param("taskId") Integer taskId,
-            @Param("startDate") LocalDateTime startDate);
+    List<Pomodoro> findByFocusStartTimeBetween(LocalDateTime start, LocalDateTime end);
 }

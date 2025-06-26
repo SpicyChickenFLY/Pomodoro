@@ -23,7 +23,7 @@ public class PomodoroServiceImpl implements PomodoroService {
     private final TaskRepository taskRepository;
     private final InterruptionRepository interruptionRepository;
 
-    public Pomodoro startPomodoro(Integer taskId) {
+    public Pomodoro startFocus(Integer taskId) {
         Task task = taskRepository.findById(taskId)
                 .orElseThrow(() -> new RuntimeException("Task not found"));
 
@@ -33,7 +33,16 @@ public class PomodoroServiceImpl implements PomodoroService {
         return pomodoroRepository.save(pomodoro);
     }
 
-    public Pomodoro completePomodoro(Integer pomodoroId) {
+    public Pomodoro abortFocus(Integer pomodoroId) {
+        Pomodoro pomodoro = pomodoroRepository.findById(pomodoroId)
+                .orElseThrow(() -> new RuntimeException("Pomodoro not found"));
+
+        Duration duration = Duration.between(pomodoro.getFocusStartTime(), LocalDateTime.now());
+        pomodoro.setFocusDuration(duration);
+        return pomodoroRepository.save(pomodoro);
+    }
+
+    public Pomodoro completeFocus(Integer pomodoroId) {
         Pomodoro pomodoro = pomodoroRepository.findById(pomodoroId)
                 .orElseThrow(() -> new RuntimeException("Pomodoro not found"));
 
@@ -46,12 +55,20 @@ public class PomodoroServiceImpl implements PomodoroService {
         Pomodoro pomodoro = pomodoroRepository.findById(pomodoroId)
                 .orElseThrow(() -> new RuntimeException("Pomodoro not found"));
 
-        Pomodoro breakRecord = new Pomodoro();
-        breakRecord.setBreakStartTime(LocalDateTime.now());
+        pomodoro.setBreakStartTime(LocalDateTime.now());
+        return pomodoroRepository.save(pomodoro);
+    }
+
+    public Pomodoro abortBreak(Integer breakId) {
+        Pomodoro breakRecord = pomodoroRepository.findById(breakId)
+                .orElseThrow(() -> new RuntimeException("Pomodoro not found"));
+
+        Duration duration = Duration.between(breakRecord.getBreakStartTime(), LocalDateTime.now());
+        breakRecord.setBreakDuration(duration);
         return pomodoroRepository.save(breakRecord);
     }
 
-    public Pomodoro endBreak(Integer breakId) {
+    public Pomodoro completeBreak(Integer breakId) {
         Pomodoro breakRecord = pomodoroRepository.findById(breakId)
                 .orElseThrow(() -> new RuntimeException("Pomodoro not found"));
 
@@ -71,9 +88,9 @@ public class PomodoroServiceImpl implements PomodoroService {
         return interruptionRepository.save(interruption);
     }
 
-    public List<Pomodoro> getDailyReport(LocalDate date) {
-        LocalDateTime start = date.atStartOfDay();
-        LocalDateTime end = date.plusDays(1).atStartOfDay();
-        return pomodoroRepository.findByStartTimeBetween(start, end);
-    }
+    // public List<Pomodoro> getDailyReport(LocalDate date) {
+    //     LocalDateTime start = date.atStartOfDay();
+    //     LocalDateTime end = date.plusDays(1).atStartOfDay();
+    //     return pomodoroRepository.findByStartTimeBetween(start, end);
+    // }
 }
