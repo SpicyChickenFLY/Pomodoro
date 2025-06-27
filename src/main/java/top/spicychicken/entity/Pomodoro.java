@@ -20,6 +20,9 @@ public class Pomodoro {
     @JoinColumn(name = "task_id", referencedColumnName = "id")
     private Task task;
 
+    @Column(name = "status")
+    private Integer status;
+
     @Column(name = "focus_duration", columnDefinition = "VARCHAR(50)") // 自动存储为"PT8H6M12.345S"格式
     private Duration focusDuration;
 

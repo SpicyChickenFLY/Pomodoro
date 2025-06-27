@@ -13,12 +13,18 @@ POST localhost:8080/api/tasks
 {
     "title": "CMDB同步工具配置",
     "status": 1,
-    "estimate_pomodoro_cnt": 2
+    "estimate_pomodoro_cnt_1st": 2
 }
 
 
 ###
-# @title Change title of task
+# @title Update task
+# @title Add task
+POST localhost:8080/api/tasks
 
-###
-# @title Change estimate_pomodoro_cnt of task
+{
+    "title": "CMDB同步工具配置",
+    "status": 2,
+    "estimate_pomodoro_cnt_1st": 2
+}
+

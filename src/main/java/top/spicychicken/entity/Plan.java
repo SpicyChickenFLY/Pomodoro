@@ -19,6 +19,9 @@ public class Plan {
     @Column(name = "plan_date")
     private LocalDate planDate;
 
+    @Column(name = "plan_type")
+    private Integer planType;
+
     // 复合主键类
     @Data
     public static class PlanId implements Serializable {

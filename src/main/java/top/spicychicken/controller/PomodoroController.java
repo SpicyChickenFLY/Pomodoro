@@ -52,6 +52,11 @@ public class PomodoroController {
         return ResponseEntity.ok(taskService.getTaskById(id));
     }
 
+    @PostMapping("/tasks/{id}")
+    public ResponseEntity<Task> updateTaskById(@PathVariable Integer id, @RequestBody Task task) {
+        return ResponseEntity.ok(taskService.updateTask(id, task));
+    }
+
     // 番茄钟核心操作接口
     @PostMapping("/task/{id}/focus/start")
     public ResponseEntity<Pomodoro> startPomodoro(@RequestParam Integer taskId) {
