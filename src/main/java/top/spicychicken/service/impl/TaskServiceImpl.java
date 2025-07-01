@@ -19,7 +19,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     public Task getTaskById(Integer id) {
-        return taskRepository.findById(id).orElseThrow(() -> new RuntimeException());
+        return taskRepository.findById(id).orElseThrow(RuntimeException::new);
     }
 
     public Task createTask(Task task) {
@@ -27,7 +27,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     public Task updateTask(Integer id, Task delta) {
-        Task task = taskRepository.findById(id).orElseThrow(() -> new RuntimeException());
+        Task task = taskRepository.findById(id).orElseThrow(RuntimeException::new);
         if (delta.getTitle() != null) {
             task.setTitle(delta.getTitle());
         }

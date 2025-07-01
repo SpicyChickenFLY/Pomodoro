@@ -8,4 +8,6 @@ import top.spicychicken.entity.Task;
 
 public interface TaskRepository extends JpaRepository<Task, Integer> {
     List<Task> findByStatus(Integer status);
+
+    // Task restoreTask(String title);
 }

@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS `interruption`;
 CREATE TABLE `interruption` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `pomodoro_id` int DEFAULT NULL, '所中断的专注'
+  `pomodoro_id` int DEFAULT NULL COMMENT '所中断的专注',
   `int_type` tinyint(1) DEFAULT NULL COMMENT '中断类型 1-内部中断 2-外部中断',
   `start_time` datetime(6) DEFAULT NULL COMMENT '中断开始时间',
   PRIMARY KEY (`id`)
@@ -19,7 +19,7 @@ DROP TABLE IF EXISTS `pomodoro`;
 CREATE TABLE `pomodoro` (
   `id` int NOT NULL AUTO_INCREMENT,
   `task_id` int DEFAULT NULL COMMENT '所专注的活动',
-  `status` tinyint(1) DEFAULT NULL COMMENT '专注状态 0-删除 1-创建 2-专注 3-休息',
+  `status` tinyint(1) DEFAULT NULL COMMENT '专注状态 0-删除 1-专注 2-休息 3-完成',
   `focus_duration` varchar(50) DEFAULT NULL COMMENT '专注预计时长',
   `focus_start_time` datetime(6) DEFAULT NULL COMMENT '专注实际开始时间',
   `focus_end_time` datetime(6) DEFAULT NULL COMMENT '专注实际结束时间',
@@ -42,5 +42,6 @@ CREATE TABLE `task` (
   `deviation_reason_2nd` varchar(255) DEFAULT NULL COMMENT '第二次预计专注数偏离原因',
   `estimate_pomodoro_cnt_3rd` int DEFAULT NULL COMMENT '第三次预计专注数',
   `deviation_reason_3rd` varchar(255) DEFAULT NULL COMMENT '第三次预计专注数偏离原因',
+  UNIQUE KEY(`title`),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
