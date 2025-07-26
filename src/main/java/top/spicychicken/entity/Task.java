@@ -47,5 +47,5 @@ public class Task {
     private List<Pomodoro> pomodoros = new ArrayList<>();
 
     @OneToMany(mappedBy = "task", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Plan> plans = new ArrayList<>();
+    private List<TaskPlanMap> taskPlanMaps = new ArrayList<>();
 }

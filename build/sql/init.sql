@@ -9,10 +9,19 @@ CREATE TABLE `interruption` (
 
 DROP TABLE IF EXISTS `plan`;
 CREATE TABLE `plan` (
-  `task_id` int NOT NULL COMMENT '所计划的活动',
+  `id` int NOT NULL AUTO_INCREMENT COMMENT '计划ID',
   `plan_date` date NOT NULL COMMENT '计划日期',
+  `status` tinyint(1) DEFAULT NULL COMMENT '计划状态 0-计划制定中 1-计划制定完成',
+  PRIMARY KEY (`id`)
+  UNIQUE KEY(`plan_date`),
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+DROP TABLE IF EXISTS `task_plan_map`;
+CREATE TABLE `task_plan_map` (
+  `task_id` int NOT NULL COMMENT '所计划的活动',
+  `plan_id` int NOT NULL COMMENT '活动分配计划',
   `plan_type` tinyint(1) NOT NULL COMMENT '计划类型',
-  PRIMARY KEY (`task_id`,`plan_date`)
+  PRIMARY KEY (`task_id`,`plan_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 DROP TABLE IF EXISTS `pomodoro`;
