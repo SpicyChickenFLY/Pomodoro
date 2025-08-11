@@ -13,6 +13,9 @@ public class Interruption {
     @Column(name = "id")
     private Integer id;
 
+    @Column(name = "is_deleted")
+    private Boolean isDeleted;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "pomodoro_id", referencedColumnName = "id")
     private Pomodoro pomodoro;

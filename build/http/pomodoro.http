@@ -1,0 +1,24 @@
+### Query focus status
+GET http://{{BASE_URL}}/api/pomodoros
+
+### Start focus for task
+POST http://{{BASE_URL}}/api/pomodoro
+
+{
+    "planId": 2,
+    "taskId": 3,
+    "focusDuration": "PT25M",
+    "focusStartTime": "2025-08-06 09:00:00"
+}
+
+### Abort focus for task
+POST http://{{BASE_URL}}/api/pomodoro/1/abort
+
+{
+    "id": 1,
+    "focusEndTime": "",
+}
+
+### Complete focus for task
+POST http://{{BASE_URL}}/api/pomodoro/1/complete
+

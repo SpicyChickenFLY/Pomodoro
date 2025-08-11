@@ -1,4 +1,11 @@
 import axios from "axios";
+import { Plan } from "./plans.ts";
+
+export interface Task {
+  id: number;
+  status: number;
+  plans?: Plan[];
+}
 
 export const getTaskList = () => {
   return axios.get("/api/tasks");

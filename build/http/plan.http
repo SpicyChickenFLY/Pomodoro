@@ -1,0 +1,35 @@
+### NOTE:================= 查询类 =====================
+
+###
+# @title Get plan by ID
+GET http://{{BASE_URL}}/api/plan/1
+
+### Get plan by date
+GET http://{{BASE_URL}}/api/plan/date?date=2023-01-01
+
+### Get plans by date range
+GET http://{{BASE_URL}}/api/plans/date-range?startDate=2025-08-01&endDate=2025-08-31
+
+
+### NOTE:================= 更新类 =====================
+
+### Create a new plan
+POST http://{{BASE_URL}}/api/plan
+Content-Type: application/json
+
+{
+  "planDate": "2025-08-06",
+  "status": 1
+}
+
+### Update plan by ID
+POST http://{{BASE_URL}}/api/plan/1
+Content-Type: application/json
+
+{
+  "planDate": "2025-08-05",
+  "status": 2
+}
+
+### Delete plan by ID
+DELETE http://{{BASE_URL}}/api/plan/1

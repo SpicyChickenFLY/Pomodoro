@@ -1,10 +1,14 @@
 package top.spicychicken.service.impl;
 
 import java.util.List;
+import java.util.logging.Logger;
 
+import org.springframework.dao.DuplicateKeyException;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
+import top.spicychicken.common.dto.commonDto;
 import top.spicychicken.entity.Task;
 import top.spicychicken.repository.TaskRepository;
 import top.spicychicken.service.TaskService;
@@ -14,8 +18,8 @@ import top.spicychicken.service.TaskService;
 public class TaskServiceImpl implements TaskService {
     private final TaskRepository taskRepository;
 
-    public List<Task> getAllTasks() {
-        return taskRepository.findAll();
+    public Page<Task> getAllTasks(commonDto<Task> taskDto) {
+        return taskRepository.findAll(taskDto.toExample(), taskDto.toPageRequest());
     }
 
     public Task getTaskById(Integer id) {
@@ -23,6 +27,10 @@ public class TaskServiceImpl implements TaskService {
     }
 
     public Task createTask(Task task) {
+        List<Task> tasks =  taskRepository.findByTitle(task.getTitle());
+        if (tasks.size() > 0) {
+            throw new DuplicateKeyException("活动标题存在重复");
+        }
         return taskRepository.save(task);
     }
 
@@ -38,9 +46,5 @@ public class TaskServiceImpl implements TaskService {
             task.setEstimatePomodoroCnt1st(delta.getEstimatePomodoroCnt1st());
         }
         return taskRepository.save(task);
-    }
-
-    public void deleteTask(Integer id) {
-        taskRepository.deleteById(id);
     }
 }

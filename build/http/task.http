@@ -1,30 +1,39 @@
-@baseUrl = localhost:8080
+### NOTE:================= 查询类 =====================
 
 ###
 # @title List all task
-GET localhost:8080/api/tasks
+GET {{BASE_URL}}/api/tasks
 
-{}
+{
+    "entity": {
+        "isDeleted": false
+    },
+    "pageNumber": 0,
+    "pageSize": 10,
+    "orders": []
+}
+
+###
+# @title Get task by ID
+GET http://{{BASE_URL}}/api/tasks/1
+
+
+### NOTE:================= 更新类 =====================
 
 ###
 # @title Add task
-POST localhost:8080/api/tasks
+POST {{BASE_URL}}/api/task
 
 {
-    "title": "CMDB同步工具配置",
-    "status": 1,
-    "estimate_pomodoro_cnt_1st": 2
+    "title": "番茄钟研发-专注接口完善",
+    "estimatePomodoroCnt1st": 4
 }
-
 
 ###
 # @title Update task
-# @title Add task
-POST localhost:8080/api/tasks
+POST {{BASE_URL}}/api/task/1
 
 {
-    "title": "CMDB同步工具配置",
-    "status": 2,
-    "estimate_pomodoro_cnt_1st": 2
+    "estimatePomodoroCnt1st": 5
 }
 

@@ -1,0 +1,17 @@
+### Get plans by task ID
+GET http://{{BASE_URL}}/api/plan/1/tasks
+
+### Get plans by task ID
+GET http://{{BASE_URL}}/api/task/1/plans
+
+### Add task to plan
+POST http://{{BASE_URL}}/api/plan/2/task/3
+Content-Type: application/json
+
+{
+  "planType": 1
+}
+
+### Remove task from plan
+DELETE http://{{BASE_URL}}/api/plan/1/task/1
+

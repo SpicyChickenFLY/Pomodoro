@@ -1,17 +1,17 @@
 package top.spicychicken.service.impl;
 
 import java.time.Duration;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
 
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import top.spicychicken.entity.Interruption;
+import top.spicychicken.entity.Plan;
 import top.spicychicken.entity.Pomodoro;
 import top.spicychicken.entity.Task;
 import top.spicychicken.repository.InterruptionRepository;
+import top.spicychicken.repository.PlanRepository;
 import top.spicychicken.repository.PomodoroRepository;
 import top.spicychicken.repository.TaskRepository;
 import top.spicychicken.service.PomodoroService;
@@ -21,14 +21,21 @@ import top.spicychicken.service.PomodoroService;
 public class PomodoroServiceImpl implements PomodoroService {
     private final PomodoroRepository pomodoroRepository;
     private final TaskRepository taskRepository;
+    private final PlanRepository planRepository;
     private final InterruptionRepository interruptionRepository;
 
-    public Pomodoro startFocus(Integer taskId) {
+    public Pomodoro startFocus(Integer planId, Integer taskId) {
+        // 如果任务在今天日常计划内
+        // 反之则是紧急计划任务,需要先紧急添加至计划
         Task task = taskRepository.findById(taskId)
                 .orElseThrow(() -> new RuntimeException("Task not found"));
+        Plan plan = planRepository.findById(planId)
+                .orElseThrow(() -> new RuntimeException("Plan not found"));
 
         Pomodoro pomodoro = new Pomodoro();
         pomodoro.setTask(task);
+        pomodoro.setPlan(plan);
+        pomodoro.setFocusDuration();
         pomodoro.setFocusStartTime(LocalDateTime.now());
         return pomodoroRepository.save(pomodoro);
     }

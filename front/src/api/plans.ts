@@ -7,20 +7,33 @@ export interface Plan {
 }
 
 export interface PlanQueryParams {
-  date?: string;
+  dateRange?: Date[];
   status?: number;
 }
 
 export const getPlanList = (params?: PlanQueryParams) => {
-  return axios.get<Plan[]>("/api/plans", { params });
+  return axios.get<Plan[]>(`/api/plans`, { params });
 };
 
 export const getPlansByTask = (taskId: number) => {
   return axios.get<Plan[]>(`/api/task/${taskId}/plans`);
 };
 
+export const getPlansByDateRange = (startDate: string, endDate: string) => {
+  return axios.get<Plan[]>(`/api/plans/date-range`, { params: { startDate, endDate } });
+};
+
+export const getPlanByDate = (taskId: number) => {
+  return axios.get<Plan[]>(`/api/plan/date`, {});
+};
+
 export const createPlan = (data: { planDate: string; status: number }) => {
-  return axios.post<Plan>("/api/plan", data);
+  return axios.post<Plan>("/api/plan", null, {
+    params: {
+      planDate: data.planDate,
+      status: data.status
+    }
+  });
 };
 
 export const addTaskToPlan = (planId: number, taskId: number, planType: number) => {

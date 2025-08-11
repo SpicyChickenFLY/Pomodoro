@@ -7,7 +7,7 @@ import top.spicychicken.entity.Interruption;
 import top.spicychicken.entity.Pomodoro;
 
 public interface PomodoroService {
-    Pomodoro startFocus(Integer taskId);
+    Pomodoro startFocus(Integer planId, Integer taskId);
     Pomodoro abortFocus(Integer pomodoroId);
     Pomodoro completeFocus(Integer pomodoroId);
     Pomodoro startBreak(Integer pomodoroId);
