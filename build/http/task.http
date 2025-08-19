@@ -15,7 +15,7 @@ GET {{BASE_URL}}/api/tasks
 
 ###
 # @title Get task by ID
-GET http://{{BASE_URL}}/api/tasks/1
+GET {{BASE_URL}}/api/tasks/1
 
 
 ### NOTE:================= 更新类 =====================
